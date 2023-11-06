@@ -89,7 +89,7 @@
             <div class="sidebar-container d-inline-block">
                 @include('../partials/sidebar')
             </div>
-            <div class="content-container d-inline-block bg-primary">
+            <div class="content-container d-inline-block">
                 @yield('content')
             </div>
         </main>
