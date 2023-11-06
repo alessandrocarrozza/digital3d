@@ -85,8 +85,11 @@
             </div>
         </nav>
 
-        <main>
-            <div class="d-inline-block">
+        <main class="d-flex">
+            <div class="sidebar-container d-inline-block">
+                @include('../partials/sidebar')
+            </div>
+            <div class="content-container d-inline-block bg-primary">
                 @yield('content')
             </div>
         </main>

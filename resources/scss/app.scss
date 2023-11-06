@@ -1,1 +1,16 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+
+
+
+//***** I DUE CONTAINER DEL MAIN FLEXATI *****
+
+// container sidebar
+.sidebar-container{
+    width: 20%;
+}
+
+// container content
+.content-container{
+    width: 80%;
+}
