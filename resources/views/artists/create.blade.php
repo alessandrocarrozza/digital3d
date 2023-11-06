@@ -3,7 +3,9 @@
 
 <h1 class="d-inline-block">create</h1>
 
-<form>
+<form method="POST" action="{{ route('admin.artists.store') }}" enctype="multipart/form-data">
+
+  @csrf
 
     <div class="form-group py-3">
       <label for="nickname">Nickname</label>
