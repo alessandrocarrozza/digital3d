@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreArtistRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\User;
+use App\Models\Artist;
 
 class ArtistController extends Controller
 {
@@ -25,9 +30,16 @@ class ArtistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArtistRequest $request) // ho sostituito Request con il nome del file del form request
     {
-        //
+        $validated_data = $request->validated();
+        $user = Auth::user();
+        $validated_data['user_id'] = $user->id;
+        $validated_data['slug'] = Str::slug($validated_data['nickname'], '-') . $user->id;
+
+        $newArtist = Artist::create($validated_data);
+
+        return redirect()->route('admin.artists.index');
     }
 
     /**
@@ -36,6 +48,9 @@ class ArtistController extends Controller
     public function show(string $id)
     {
         //
+        $user = Auth::user();
+        $artist = Artist::findOrFail($id);
+        return view('artists.show', compact('artist', 'user'));
     }
 
     /**

@@ -11,7 +11,7 @@ class StoreArtistRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return true; // ho cambiato da false a true
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreArtistRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // regole di validazione dei campi del form create
+            'nickname' => 'required|string',
+            'birth_date' => 'nullable|date',
+            'gender' => 'nullable|string',
+            'photo' => 'nullable|image|max:10000',
+            'biography' => 'nullable|string',
+            'nationality' => 'nullable|string',
+            'based' => 'nullable|string',
+            'phone' => 'nullable|string',
+            'business_email' => 'nullable|string',
+            'instagram' => 'nullable|string',
+            'facebook' => 'nullable|string',
+            'linkedin' => 'nullable|string'
         ];
     }
 }
