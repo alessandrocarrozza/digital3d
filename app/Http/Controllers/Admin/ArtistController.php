@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Artist;
+use Illuminate\Support\Facades\Storage;
 
 class ArtistController extends Controller
 {
@@ -46,6 +47,11 @@ class ArtistController extends Controller
             // Se non esiste un profilo artista, crea uno nuovo
             $validated_data['user_id'] = $user->id;
             $validated_data['slug'] = Str::slug($validated_data['nickname'], '-') . $user->id;
+
+            if ($request->hasFile('photo')) {
+                $path = Storage::put('artist_photo', $request->photo);
+                $validated_data['photo'] = $path;
+            }
     
             $newArtist = Artist::create($validated_data);
     
@@ -86,6 +92,16 @@ class ArtistController extends Controller
         $validated_data['user_id'] = $user->id;
         $validated_data['slug'] = Str::slug($validated_data['nickname'], '-') . $user->id;
 
+        if ($request->hasFile('photo')) {
+
+            if ($artist->photo) {
+                Storage::delete($artist->photo);
+            }
+
+            $path = Storage::put('artist_photo', $request->photo);
+            $validated_data['photo'] = $path;
+        }
+
         $artist->update($validated_data);
 
         return redirect()->route('admin.artists.show', $artist->slug)
@@ -96,7 +112,10 @@ class ArtistController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Artist $artist) // dependency injection
-    {
+    {   
+        if ($artist->photo) {
+            Storage::delete($artist->photo);
+        }
         $artist->delete();
         return redirect()->route('admin.dashboard');
     }

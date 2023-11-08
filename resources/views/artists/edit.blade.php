@@ -46,6 +46,7 @@
       <div class="form-group py-3">
         <label for="photo">photo</label>
         <input type="file" id="photo" name="photo" value="{{ old('photo', $artist->photo) }}">
+        <img src="{{ asset('storage/' . $artist->photo) }}" alt="{{ $artist->slug }}" />
         @error('photo')
           <div class="invalid-feedback">
               {{ $message }}

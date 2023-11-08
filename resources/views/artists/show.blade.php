@@ -14,6 +14,7 @@
 
 <h1>show</h1>
 <h3>{{$artist->slug}}</h3>
+<img src="{{asset('storage/' . $artist->photo)}}" :alt="$artist->slug">
 <ul>
     <li>
         <h4>{{$artist->gender}}</h4>
