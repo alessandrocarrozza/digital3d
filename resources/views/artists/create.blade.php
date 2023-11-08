@@ -67,6 +67,7 @@
     <div class="form-group py-3">
       <label for="nationality">Nazionalità</label>
       <select name="nationality" id="nationality">
+        <option value="">Seleziona</option>
         <option value="it">Italia</option>
         <option value="en">Inghilterra</option>
         <option value="de">Germania</option>
