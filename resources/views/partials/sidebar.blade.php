@@ -10,12 +10,21 @@
             </a>
         </li>
 
+        @if(isset($artist))
         <li class="nav-item">
             <a href="{{ route('admin.artists.show', $artist->slug)}}"
                 class="nav-link @if (Route::currentRouteName() == 'admin.artists.show') active @endif" aria-current="page">
                 Vedi Profilo
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('admin.artists.edit', $artist->slug)}}"
+                class="nav-link @if (Route::currentRouteName() == 'admin.artists.edit') active @endif" aria-current="page">
+                Modifica
+            </a>
+        </li>
+        @endif
 
         <li class="nav-item">
             <a href="{{ route('admin.artists.create') }}"

@@ -34,31 +34,44 @@ class ArtistController extends Controller
     {
         $validated_data = $request->validated();
         $user = Auth::user();
-        $validated_data['user_id'] = $user->id;
-        $validated_data['slug'] = Str::slug($validated_data['nickname'], '-') . $user->id;
 
-        $newArtist = Artist::create($validated_data);
+        $existingArtist = Artist::where('user_id', $user->id)->first();
 
-        return redirect()->route('admin.artists.index');
+        if ($existingArtist) {
+            // Un profilo artista già esiste per questo utente, puoi gestire l'errore o reindirizzare l'utente a una pagina appropriata
+            return redirect()->route('admin.artists.index')
+                ->with('error', 'Hai già un profilo artista.');
+        } else {
+            // Se non esiste un profilo artista, crea uno nuovo
+            $validated_data['user_id'] = $user->id;
+            $validated_data['slug'] = Str::slug($validated_data['nickname'], '-') . $user->id;
+    
+            $newArtist = Artist::create($validated_data);
+    
+            return redirect()->route('admin.artists.index')
+                ->with('success', 'Profilo artista creato con successo.');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        // info dell'artista nella show
         $user = Auth::user();
-        $artist = Artist::findOrFail($id);
+        $artist = Artist::where('slug', $slug)->first();
         return view('artists.show', compact('artist', 'user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(string $slug)
+    {   
+        $user = Auth::user();
+        $artist = Artist::where('slug', $slug)->first();
+        return view('artists.edit', compact('artist', 'user'));
     }
 
     /**
