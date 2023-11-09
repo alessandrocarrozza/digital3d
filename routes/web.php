@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ArtistController;
+use App\Http\Controllers\Admin\WorkController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,12 @@ Route::middleware(['auth', 'verified'])
         Route::resource('artists', ArtistController::class)->parameters([
             'artists' => 'artist:slug', // added slug parameter for URL
         ]);
+
+        Route::middleware('artist.auth')->group(function () {
+            Route::resource('works', WorkController::class)->parameters([
+                'works' => 'work:slug', // added slug parameter for URL
+            ]);
+        });
 });
 
 Route::middleware('auth')->group(function () {
