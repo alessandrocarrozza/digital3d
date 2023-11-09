@@ -24,6 +24,13 @@
                 Modifica
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('admin.works.index')}}"
+                class="nav-link @if (Route::currentRouteName() == 'admin.works.index') active @endif" aria-current="page">
+                Opere
+            </a>
+        </li>
         
         @endif
 

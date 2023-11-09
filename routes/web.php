@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('artists', ArtistController::class)->parameters([
             'artists' => 'artist:slug', // added slug parameter for URL
         ]);
+        
 
         Route::middleware('artist.auth')->group(function () {
             Route::resource('works', WorkController::class)->parameters([
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'verified'])
             ]);
         });
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

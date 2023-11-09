@@ -18,7 +18,7 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        return view('artists.index');
+        return view('admin.artists.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        return view('artists.create');
+        return view('admin.artists.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class ArtistController extends Controller
         // info dell'artista nella show
         $user = Auth::user();
         // $artist = Artist::where('slug', $slug)->first();
-        return view('artists.show', compact('artist', 'user'));
+        return view('admin.artists.show', compact('artist', 'user'));
     }
 
     /**
@@ -78,7 +78,7 @@ class ArtistController extends Controller
     {   
         $user = Auth::user();
         // $artist = Artist::where('slug', $slug)->first();
-        return view('artists.edit', compact('artist', 'user'));
+        return view('admin.artists.edit', compact('artist', 'user'));
     }
 
     /**

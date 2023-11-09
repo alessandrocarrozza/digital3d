@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
+use App\Models\User;
+use App\Models\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WorkController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() // non posso usare la dependency injection di Artist, ma solo di Work
     {
-        //
+        $user = Auth::user();
+        $artist = Artist::where('user_id', $user->id)->first();
+        return view('admin.works.index', compact('artist', 'user'));
     }
 
     /**
