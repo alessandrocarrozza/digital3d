@@ -16,4 +16,16 @@ class Work extends Model
         'note',
         'slug'
     ];
+
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
 }

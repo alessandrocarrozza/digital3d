@@ -25,4 +25,16 @@ class Artist extends Model
         'linkedin',
         'slug'
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function works()
+    {
+        return $this->hasMany(Work::class);
+    }
 }

@@ -33,8 +33,8 @@ class WorkController extends Controller
     {   
         $user = Auth::user();
         $artist = Artist::where('user_id', $user->id)->first();
-        $category = Category::all();
-        return view('admin.works.create', compact('artist', 'user', 'category'));
+        $categories = Category::all();
+        return view('admin.works.create', compact('artist', 'user', 'categories'));
     }
 
     /**
