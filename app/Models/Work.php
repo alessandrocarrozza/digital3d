@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Work extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'artist_id',
+        'image',
+        'title',
+        'note',
+        'slug'
+    ];
 }
