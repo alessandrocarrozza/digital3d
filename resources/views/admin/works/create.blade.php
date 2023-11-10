@@ -13,8 +13,15 @@
       </div>
 
       <div class="form-group py-3">
+        <div class="d-inline-block">
+            <label for="title">Title</label>
+            <input type="title" id="title" name="title">
+        </div>
+      </div>
+
+      <div class="form-group py-3">
         <label for="title">Title</label>
-        <input type="title" id="title" name="title">
+        <input type="checkbox">
       </div>
 
       <div class="form-group py-3">
