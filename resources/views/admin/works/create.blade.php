@@ -20,8 +20,8 @@
       <div class="form-group py-3 w-50">
         @foreach ($categories as $category)
           <div class="d-inline-block m-2">
-            <label for="{{$category->name}}">{{$category->name}}</label>
-            <input type="checkbox" id="{{$category->name}}" name="{{$category->name}}" value="{{$category->name}}">
+            <label for="category_{{$category->id}}">{{$category->name}}</label>
+            <input type="checkbox" id="category_{{$category->id}}" name="categories[]" value="{{$category->id}}">
           </div>       
         @endforeach
       </div>

@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('work_category', function (Blueprint $table) {
-            $table->dropColumn(['id', 'created_at', 'updated_at']);
-        });
+        Schema::dropIfExists('work_category');
     }
 
     /**
@@ -21,8 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('work_category', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

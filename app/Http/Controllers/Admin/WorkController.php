@@ -56,6 +56,9 @@ class WorkController extends Controller
         $newWork = Work::create($validated_data);
 
         //dd($newWork);
+        if ($request->has('categories')) {
+            $newWork->categories()->attach($request->categories);
+        }
     
         return redirect()->route('admin.works.index')
         ->with('success', 'Nuova opera creata con successo.');
