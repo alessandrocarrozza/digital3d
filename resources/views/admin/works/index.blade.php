@@ -6,9 +6,39 @@
     Nuova opera
 </a>
 
-<div class="mt-3">
-    <ul class="list-group">
-        <li class="list-group-item">Cras justo odio</li>
-    </ul>
-</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Titolo</th>
+        <th scope="col">Slug</th>
+        <th scope="col">Categorie</th>
+        <th scope="col">Immagine</th>
+        <th scope="col">Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach ($works as $work)
+      <tr>
+        <td>{{$work->title}}</td>
+        <td>{{$work->slug}}</td>
+        <td>
+          @foreach ($work->categories as $category)
+          <span class="my-badge">{{$category->name}}</span>
+          @endforeach
+        </td>
+        <td>
+            <img class="work-img" src="{{ asset('storage/' . $work->image) }}" alt="{{ $work->slug }}">
+        </td>
+        <td>
+          <div>
+              <a href="{{ route('admin.works.edit', $work->slug)}}"
+                class="nav-link @if (Route::currentRouteName() == 'admin.works.edit') active @endif" aria-current="page">
+                Modifica Profilo
+              </a>
+          </div>
+        </td>
+      </tr>
+    @endforeach
+    </tbody>
+  </table>
 @endsection

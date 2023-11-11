@@ -22,8 +22,9 @@ class WorkController extends Controller
     {
         $user = Auth::user();
         $artist = Artist::where('user_id', $user->id)->first();
-        $work = Work::where('artist_id', $user->id)->get();
-        return view('admin.works.index', compact('artist', 'user', 'work'));
+        $works = Work::where('artist_id', $artist->id)->get();
+        // dd($works);
+        return view('admin.works.index', compact('artist', 'user', 'works'));
     }
 
     /**
@@ -47,6 +48,12 @@ class WorkController extends Controller
         $validated_data = $request->validated();
         $validated_data['artist_id'] = $artist->id;
         $validated_data['slug'] = Str::slug($validated_data['title'], '-') . $user->id;
+
+        // Verifica se esiste già un'opera con lo stesso titolo per l'artista
+        if ($artist->works()->where('title', $validated_data['title'])->exists()) {
+            return redirect()->route('admin.works.create')
+                ->with('error', 'Hai già un\'opera con lo stesso titolo.');
+        }
 
         if ($request->hasFile('image')) {
             $path = Storage::put('work_image', $request->image);

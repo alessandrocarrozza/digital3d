@@ -90,7 +90,7 @@
                 @include('../partials/sidebar')
             </div>
             <div class="content-container d-inline-block">
-                @include('../partials/errors')
+                @include('../partials/status')
                 @yield('content')
             </div>
         </main>

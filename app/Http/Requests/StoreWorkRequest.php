@@ -25,6 +25,7 @@ class StoreWorkRequest extends FormRequest
             // regole di validazione dei campi del form create
             'image' => 'required|image|max:10000',
             'title' => 'required|string',
+            'categories' => 'required',
             'note' => 'nullable|string',
         ];
     }

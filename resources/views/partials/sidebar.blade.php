@@ -21,7 +21,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.artists.edit', $artist->slug)}}"
                 class="nav-link @if (Route::currentRouteName() == 'admin.artists.edit') active @endif" aria-current="page">
-                Modifica
+                Modifica Profilo
             </a>
         </li>
 
