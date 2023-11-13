@@ -23,7 +23,7 @@ class UpdateWorkRequest extends FormRequest
     {
         return [
             // regole di validazione dei campi del form edit
-            'image' => 'required|image|max:10000',
+            // 'image' => 'required|image|max:10000', meglio che l'img rimanga fissa, per evitare cambi frequenti
             'title' => 'required|string',
             'categories' => 'required',
             'note' => 'nullable|string',

@@ -31,11 +31,22 @@
         </td>
         <td>
           <div>
+            <a href="{{ route('admin.works.show', $work->slug)}}"
+              class="btn btn-primary m-1 @if (Route::currentRouteName() == 'admin.works.show') active @endif" aria-current="page">
+              Vedi
+            </a>
+          </div>
+          <div>
               <a href="{{ route('admin.works.edit', $work->slug)}}"
-                class="btn btn-warning @if (Route::currentRouteName() == 'admin.works.edit') active @endif" aria-current="page">
+                class="btn btn-warning m-1 @if (Route::currentRouteName() == 'admin.works.edit') active @endif" aria-current="page">
                 Modifica
               </a>
           </div>
+          <form action="{{ route('admin.works.destroy', $work->slug) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger m-1">Elimina</button>
+          </form>
         </td>
       </tr>
     @endforeach

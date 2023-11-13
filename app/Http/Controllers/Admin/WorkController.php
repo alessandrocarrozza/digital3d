@@ -95,7 +95,7 @@ class WorkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWorkRequest $request, string $id)
+    public function update(UpdateWorkRequest $request, Work $work)
     {
         $user = Auth::user();
         $artist = Artist::where('user_id', $user->id)->first();
@@ -103,33 +103,33 @@ class WorkController extends Controller
         $validated_data['artist_id'] = $artist->id;
         $validated_data['slug'] = Str::slug($validated_data['title'], '-') . $user->id;
 
-        // Verifica se esiste già un'opera con lo stesso titolo per l'artista
-        if ($artist->works()->where('title', $validated_data['title'])->exists()) {
-            return redirect()->route('admin.works.create')
-                ->with('error', 'Hai già un\'opera con lo stesso titolo.');
-        }
-
+        // Se è presente un nuovo file immagine, aggiornalo
         if ($request->hasFile('image')) {
-            $path = Storage::put('work_image', $request->image);
-            $validated_data['image'] = $path;
+            // Aggiorna l'immagine e altri campi se necessario
+            return redirect()->route('admin.works.index')
+        ->with('error', 'Non puoi cambiare l\'immagine, crea una nuova opera.');
         }
 
-        $newWork = Work::create($validated_data);
+        $work->update($validated_data);
 
         //dd($newWork);
         if ($request->has('categories')) {
-            $newWork->categories()->attach($request->categories);
+            $work->categories()->sync($request->categories);
         }
     
         return redirect()->route('admin.works.index')
-        ->with('success', 'Nuova opera creata con successo.');
+        ->with('success', 'Opera aggiornata con successo.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Work $work)
     {
-        //
+        if ($work->image) {
+            Storage::delete($work->image);
+        }
+        $work->delete();
+        return redirect()->route('admin.dashboard');
     }
 }

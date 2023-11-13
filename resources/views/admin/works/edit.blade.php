@@ -1,15 +1,14 @@
 @extends('layouts.admin')
 @section('content')
-
 <h1>work edit</h1>
-
 <form method="POST" action="{{ route('admin.works.update', ['work' => $work->slug]) }}" enctype="multipart/form-data">
 
     @csrf
+    @method('PUT')
   
       <div class="form-group py-3">
         <label for="image">Immagine</label>
-        <input class="@error('image') is-invalid @enderror" type="file" id="image" name="image" value="{{ old('image', $work->image) }}">
+        {{-- <input class="@error('image') is-invalid @enderror" type="file" id="image" name="image" value="{{ old('image', $work->image) }}"> --}}
         <img class="work-img" src="{{ asset('storage/' . $work->image) }}" alt="{{ $work->slug }}" />
       </div>
 
