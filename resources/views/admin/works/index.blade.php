@@ -32,8 +32,8 @@
         <td>
           <div>
               <a href="{{ route('admin.works.edit', $work->slug)}}"
-                class="nav-link @if (Route::currentRouteName() == 'admin.works.edit') active @endif" aria-current="page">
-                Modifica Profilo
+                class="btn btn-warning @if (Route::currentRouteName() == 'admin.works.edit') active @endif" aria-current="page">
+                Modifica
               </a>
           </div>
         </td>

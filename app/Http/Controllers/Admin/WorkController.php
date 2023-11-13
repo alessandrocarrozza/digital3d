@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreWorkRequest;
+use App\Http\Requests\UpdateWorkRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -83,17 +84,45 @@ class WorkController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Work $work)
     {
-        //
+        $user = Auth::user();
+        $artist = Artist::where('user_id', $user->id)->first();
+        $categories = Category::all();
+        return view('admin.works.edit', compact('work', 'categories', 'user', 'artist'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateWorkRequest $request, string $id)
     {
-        //
+        $user = Auth::user();
+        $artist = Artist::where('user_id', $user->id)->first();
+        $validated_data = $request->validated();
+        $validated_data['artist_id'] = $artist->id;
+        $validated_data['slug'] = Str::slug($validated_data['title'], '-') . $user->id;
+
+        // Verifica se esiste già un'opera con lo stesso titolo per l'artista
+        if ($artist->works()->where('title', $validated_data['title'])->exists()) {
+            return redirect()->route('admin.works.create')
+                ->with('error', 'Hai già un\'opera con lo stesso titolo.');
+        }
+
+        if ($request->hasFile('image')) {
+            $path = Storage::put('work_image', $request->image);
+            $validated_data['image'] = $path;
+        }
+
+        $newWork = Work::create($validated_data);
+
+        //dd($newWork);
+        if ($request->has('categories')) {
+            $newWork->categories()->attach($request->categories);
+        }
+    
+        return redirect()->route('admin.works.index')
+        ->with('success', 'Nuova opera creata con successo.');
     }
 
     /**
