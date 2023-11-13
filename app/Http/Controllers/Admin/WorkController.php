@@ -76,9 +76,12 @@ class WorkController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Work $work)
     {
-        //
+        // info dell'artista nella show
+        $user = Auth::user();
+        $artist = Artist::where('user_id', $user->id)->first();
+        return view('admin.works.show', compact('work', 'artist', 'user'));
     }
 
     /**
