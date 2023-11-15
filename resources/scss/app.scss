@@ -21,15 +21,51 @@ main{
 .sidebar-container{
     width: 350px;
     display: inline-block;
+
+    .my-navbar{
+        background-color: lightblue;
+    }
 }
 
 // container content
 .content-container{
     width: calc(100% - 355px); // 5px in piu per garantire l'affiancamento
     display: inline-block;
-    background-color: red;
     overflow-y: auto;
+    background-color: #f8f9fd;
 
+    //***** DASHBOARD *****
+    #container-dashboard{
+        height: calc(100% - 48px); // sottraggo l'h1 Dashboard
+
+        .my-card{
+            width: 50%;
+        }
+
+        .my-card, .my-big-card{
+            height: 50%;
+            padding: 1rem;
+
+            .content{
+                height: 100%;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                border-radius: 10px;
+
+                .works-num{
+                    font-size: 3.5rem;
+                }
+            }
+        }
+
+        .my-big-card{
+            width: 100%;
+        }
+    }
+
+    //***** ARTIST SHOW *****
+
+
+    //***** WORK INDEX *****
     // immagini delle opere nell'index
     .work-img{
         height: 120px;

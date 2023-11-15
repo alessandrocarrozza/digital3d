@@ -1,4 +1,4 @@
-<div class="my-navbar p-3 bg-light h-100">
+<div class="my-navbar p-3 h-100">
     <h1>Sidebar</h1>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -14,7 +14,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.artists.show', $artist->slug)}}"
                 class="nav-link @if (Route::currentRouteName() == 'admin.artists.show') active @endif" aria-current="page">
-                Vedi Profilo
+                Profilo Artista
             </a>
         </li>
 
