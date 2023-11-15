@@ -13,19 +13,22 @@
 }
 
 main{
-    min-height: calc(100vh - 76px); // sottraggo l'header
+    height: calc(100vh - 76px);
+    display: flex;
 }
 
 // container sidebar
 .sidebar-container{
     width: 350px;
-    height: calc(100vh - 76px); // sottraggo l'header
+    display: inline-block;
 }
 
 // container content
 .content-container{
     width: calc(100% - 355px); // 5px in piu per garantire l'affiancamento
-        
+    display: inline-block;
+    background-color: red;
+    overflow-y: auto;
 
     // immagini delle opere nell'index
     .work-img{

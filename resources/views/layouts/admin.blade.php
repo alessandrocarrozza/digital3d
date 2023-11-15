@@ -85,10 +85,10 @@
         </nav>
 
         <main>
-            <div class="sidebar-container d-inline-block">
+            <div class="sidebar-container">
                 @include('../partials/sidebar')
             </div>
-            <div class="content-container d-inline-block">
+            <div class="content-container">
                 @include('../partials/status')
                 @yield('content')
             </div>
