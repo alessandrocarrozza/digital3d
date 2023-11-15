@@ -84,14 +84,9 @@
             </div>
         </nav>
 
-        <main>
-            <div class="sidebar-container d-inline-block">
-                @include('../partials/sidebar')
-            </div>
-            <div class="content-container d-inline-block">
-                @include('../partials/status')
-                @yield('content')
-            </div>
+        <main class="d-flex">
+            @include('../partials/status')
+            @yield('content')
         </main>
     </div>
 </body>
