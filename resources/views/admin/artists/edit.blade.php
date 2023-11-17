@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <h1>edit</h1>
-<form method="POST" action="{{ route('admin.artists.update', ['artist' => $artist->slug]) }}" enctype="multipart/form-data">
+{{-- <form method="POST" action="{{ route('admin.artists.update', ['artist' => $artist->slug]) }}" enctype="multipart/form-data">
 
     @csrf
     @method('PUT')
@@ -134,5 +134,89 @@
         @csrf
         @method('DELETE')
         <button>elimina</button>
-    </form>
+    </form> --}}
+
+<div class="w-50 mx-auto">
+  <form method="POST" action="{{ route('admin.artists.update', ['artist' => $artist->slug]) }}" enctype="multipart/form-data">
+
+    @csrf
+    @method('PUT')
+
+
+    <div class="form-group my-3">
+      <label for="nickname">Nickname</label>
+      <input type="nickname" class="form-control @error('nickname') is-invalid @enderror" id="nickname" value="{{ old('nickname', $artist->nickname) }}">
+      @error('nickname')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+      @enderror
+    </div>
+
+    <div class="form-group my-3">
+      <label for="photo">Scegli immagine profilo</label>
+        <input type="file" id="photo" name="photo" value="{{ old('photo', $artist->photo) }}">
+        @if($artist->photo)
+        <img src="{{ asset('storage/' . $artist->photo) }}" alt="{{ $artist->slug }}" />
+        @else
+        <span></span>
+        @endif
+        @error('photo')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+        @enderror
+    </div>
+
+    <div class="form-group my-3">
+      <label for="birth_date">birth date</label>
+        <input class="@error('birth_date') is-invalid @enderror" type="date" id="birth_date" name="birth_date" value="{{ old('birth_date', $artist->birth_date) }}">
+        @error('birth_date')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+        @enderror
+    </div>
+
+    <div class="form-group my-3">
+      <h6 class="d-inline pe-4">Genere :</h6>
+        <label for="gender">Male</label>
+        <input class="me-2" type="radio" id="gender" name="gender" value="male" @if (old('gender', $artist->gender) === 'male') checked @endif>
+  
+        <label for="gender">Female</label>
+        <input class="me-2" type="radio" id="gender" name="gender" value="female" @if (old('gender', $artist->gender) === 'female') checked @endif>
+  
+        <label for="gender">Not binary</label>
+        <input class="me-2" type="radio" id="gender" name="gender" value="not_binary" @if (old('gender', $artist->gender) === 'not_binary') checked @endif>
+        @error('gender')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+        @enderror
+    </div>
+
+    <div class="form-group my-3">
+      <label for="biography">Bio</label>
+      <textarea class="form-control" id="biography" rows="3" value="{{ old('biography', $artist->biography) }}"></textarea>      
+      @error('biography')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+      @enderror
+    </div>
+
+    <div class="form-group my-3">
+      <label for="nickname">Nickname</label>
+      <input type="nickname" class="form-control @error('nickname') is-invalid @enderror" id="nickname" value="{{ old('nickname', $artist->nickname) }}">
+      @error('nickname')
+          <div class="invalid-feedback">
+              {{ $message }}
+          </div>
+      @enderror
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</div>
 @endsection

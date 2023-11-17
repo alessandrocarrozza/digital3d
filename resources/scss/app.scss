@@ -63,6 +63,14 @@ main{
     }
 
     //***** ARTIST SHOW *****
+    #container-show-artist > div{
+        padding: 0.3rem 0;
+    }
+    .artist-photo{
+        margin: 1rem 0;
+        border-radius: 50%;
+        height: 180px;
+    }
 
 
     //***** WORK INDEX *****
