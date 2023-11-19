@@ -128,7 +128,7 @@
 
 
 
-    <button type="submit" class="btn btn-primary">Invia</button>
+    <button type="submit" class="btn btn-primary">Conferma</button>
 
   </form>
 </div>
