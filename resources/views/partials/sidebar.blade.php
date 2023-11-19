@@ -19,13 +19,6 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('admin.artists.edit', $artist->slug)}}"
-                class="nav-link @if (Route::currentRouteName() == 'admin.artists.edit') active @endif" aria-current="page">
-                Modifica Profilo
-            </a>
-        </li>
-
-        <li class="nav-item">
             <a href="{{ route('admin.works.index')}}"
                 class="nav-link @if (Route::currentRouteName() == 'admin.works.index') active @endif" aria-current="page">
                 Opere

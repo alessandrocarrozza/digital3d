@@ -86,6 +86,7 @@ class ArtistController extends Controller
      */
     public function update(StoreArtistRequest $request, Artist $artist) // dependency injection
     {
+        // dd($request);
         $validated_data = $request->validated();
         $user = Auth::user();
 
