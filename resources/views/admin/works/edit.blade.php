@@ -43,7 +43,7 @@
 
       <div class="form-group mb-3 text-center">
         <label for="image" class="d-block pb-3">Immagine:</label>
-        <img class="work-img" src="{{ asset('storage/' . $work->image) }}" alt="{{ $work->slug }}" />
+        <img class="work-img w-100" src="{{ asset('storage/' . $work->image) }}" alt="{{ $work->slug }}" />
       </div>
 
       <div class="form-group mb-3">
