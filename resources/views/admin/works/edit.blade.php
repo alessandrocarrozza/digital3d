@@ -57,6 +57,7 @@
       </div>
 
       <div class="form-group py-3">
+        <h6>Categorie:</h6>
         @foreach ($categories as $category)
           <div class="d-inline-block m-2">
             <label for="category_{{$category->id}}">{{$category->name}}</label>
