@@ -42,7 +42,7 @@ class WorkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreWorkRequest $request)
+    public function store(StoreWorkRequest $request, Work $work)
     {
         $user = Auth::user();
         $artist = Artist::where('user_id', $user->id)->first();
@@ -68,8 +68,8 @@ class WorkController extends Controller
             $newWork->categories()->attach($request->categories);
         }
     
-        return redirect()->route('admin.works.index')
-        ->with('success', 'Nuova opera creata con successo.');
+        return redirect()->route('admin.works.show', $newWork->slug)
+            ->with('success', 'Opera creata con successo.');
         
     }
 
@@ -120,8 +120,8 @@ class WorkController extends Controller
             $work->categories()->sync($request->categories);
         }
     
-        return redirect()->route('admin.works.index')
-        ->with('success', 'Opera aggiornata con successo.');
+        return redirect()->route('admin.works.show', $work->slug)
+            ->with('success', 'Opera aggiornata con successo.');
     }
 
     /**
@@ -133,6 +133,7 @@ class WorkController extends Controller
             Storage::delete($work->image);
         }
         $work->delete();
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.works.index')
+        ->with('success', 'Opera eliminata con successo.');;
     }
 }
