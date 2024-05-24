@@ -33,14 +33,10 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('artists', ArtistController::class)->parameters([
             'artists' => 'artist:slug', // added slug parameter for URL
+        ]);     
+        Route::resource('works', WorkController::class)->parameters([
+            'works' => 'work:slug', // added slug parameter for URL
         ]);
-        
-
-        Route::middleware('artist.auth')->group(function () {
-            Route::resource('works', WorkController::class)->parameters([
-                'works' => 'work:slug', // added slug parameter for URL
-            ]);
-        });
 });
 
 

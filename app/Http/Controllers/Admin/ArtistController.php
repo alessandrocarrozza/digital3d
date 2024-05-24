@@ -109,8 +109,9 @@ class ArtistController extends Controller
             ->with('success', 'Profilo artista aggiornato con successo.');
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage
      */
     public function destroy(Artist $artist) // dependency injection
     {   
